@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi"; // Hamburger and close icons
+import { MdCancel } from "react-icons/md";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false); // State to toggle the hamburger menu
@@ -73,7 +74,7 @@ export default function App() {
               />
               <button
                 type="submit"
-                className="absolute right-1.5 text-white bg-blue-600 hover:bg-blue-700 p-3 rounded-full"
+                className="absolute right-1.5 top-0.5 text-white bg-blue-600 hover:bg-blue-700 p-3 rounded-full"
               >
                 <FiSearch size={20} />
               </button>
@@ -92,57 +93,71 @@ export default function App() {
         </button>
       </div>
 
-      {menuOpen && (
-        <div className="sm:flex lg:hidden bg-gray-800 text-white p-4 flex flex-col m-auto">
-          <NavLink
-            to="/movies"
-            className="text-sky-500 font-bold uppercase"
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 right-0 h-screen w-screen bg-slate-800 text-white px-10 py-5 flex flex-col transform transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+
+        {/* Close Icon */}
+        <div className="flex justify-end">
+          <button
             onClick={() => setMenuOpen(false)}
+            className="text-blue-500 focus:outline-none"
           >
-            Movies
-          </NavLink>
-          <NavLink
-            to="/about"
-            className="text-sky-500 font-bold uppercase"
-            onClick={() => setMenuOpen(false)}
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className="text-sky-500 font-bold uppercase"
-            onClick={() => setMenuOpen(false)}
-          >
-            Contacts
-          </NavLink>
-          <NavLink
-            to="/login"
-            className="text-sky-500 font-bold uppercase"
-            onClick={() => setMenuOpen(false)}
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/profile"
-            onClick={() => setMenuOpen(false)}
-          >
-            <FaUserAlt className="w-5 h-5" />
-          </NavLink>
+            <MdCancel size={30} />
+          </button>
         </div>
-      )}
+
+
+
+        <NavLink
+          to="/movies"
+          className="text-sky-500 font-bold uppercase mb-4"
+        >
+          Movies
+        </NavLink>
+        <NavLink
+          to="/about"
+          className="text-sky-500 font-bold uppercase mb-4"
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className="text-sky-500 font-bold uppercase mb-4"
+        >
+          Contacts
+        </NavLink>
+        <NavLink
+          to="/login"
+          className="text-sky-500 font-bold uppercase mb-4"
+        >
+          Login
+        </NavLink>
+        <NavLink
+          to="/profile"
+          className="flex items-center space-x-2"
+        >
+          <FaUserAlt className="w-5 h-5" />
+          <span>Profile</span>
+        </NavLink>
+      </div>
+
 
       {/* Central Navigation Menu (Visible only on medium screens and larger) */}
       <NavbarContent className="hidden lg:flex gap-8 justify-center">
-        <NavLink to="/movies" className={({ isActive }) => `font-bold uppercase ${isActive ? "text-blue-500" : "text-white"}`}>
+        <NavLink to="/movies" className={({ isActive }) => `font-bold uppercase transform hover:scale-110 transition-transform duration-300 ease-in-out ${isActive ? "text-blue-500" : "text-white"}`}>
           Movies
         </NavLink>
-        <NavLink to="/about" className={({ isActive }) => `font-bold uppercase ${isActive ? "text-blue-500" : "text-white"}`}>
+        <NavLink to="/about" className={({ isActive }) => `font-bold uppercase transform hover:scale-110 transition-transform duration-300 ease-in-out ${isActive ? "text-blue-500" : "text-white"}`}>
           About
         </NavLink>
-        <NavLink to="/contact" className={({ isActive }) => `font-bold uppercase ${isActive ? "text-blue-500" : "text-white"}`}>
+        <NavLink to="/contact" className={({ isActive }) => `font-bold uppercase transform hover:scale-110 transition-transform duration-300 ease-in-out ${isActive ? "text-blue-500" : "text-white"}`}>
           Contacts
         </NavLink>
-        <NavLink to="/login" className={({ isActive }) => `font-bold uppercase ${isActive ? "text-blue-500" : "text-white"}`}>
+        <NavLink to="/login" className={({ isActive }) => `font-bold uppercase transform hover:scale-110 transition-transform duration-300 ease-in-out ${isActive ? "text-blue-500" : "text-white"}`}>
           Login
         </NavLink>
         <NavLink to="/profile" >
