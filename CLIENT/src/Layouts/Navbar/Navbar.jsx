@@ -95,8 +95,8 @@ export default function App() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-screen w-screen bg-slate-800 text-white px-10 py-5 flex flex-col transform transition-transform duration-300 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 h-screen w-screen bg-slate-800 text-white px-10 py-5 flex flex-col transform transition-transform duration-1000  ease-in-out ${
+          menuOpen ? "translate-x-0" : "hidden translate-x-full"
         }`}
       >
 
