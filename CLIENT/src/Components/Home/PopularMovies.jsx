@@ -1,13 +1,37 @@
-import React, { useEffect, useRef } from 'react';
-import Title from '../Title';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { BiSolidMoviePlay } from "react-icons/bi";
-import { movies } from '../../Data/MovieData';
-import Movie from '../Movie';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import Title from '../Title';
+// import { movies } from '../../Data/MovieData';
 import 'swiper/css'; // Core Swiper styles
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link } from 'react-router-dom';
 
 const PopularMovies = () => {
   const swiperRef = useRef(null); // Ref for Swiper instance
+  const [movies, setMovies] = useState([]);
+  const apiKey = "81a74c01";
+
+  const fetchMovies = useCallback(async () => {
+    const movieList = [];
+    const keywords = ["game", "suspense", "movie", "comedy", "thriller"];
+    try {
+      for (const keyword of keywords) {
+        const url = `https://www.omdbapi.com/?s=${keyword}&apikey=${apiKey}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.Search) {
+          movieList.push(...data.Search);
+        }
+      }
+      setMovies(movieList);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  }, [apiKey]);
+
+  useEffect(() => {
+    fetchMovies();
+  }, [fetchMovies]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +64,15 @@ const PopularMovies = () => {
         >
           {movies.map((movie, index) => (
             <SwiperSlide key={index} className="w-auto">
-              <Movie movie={movie} />
+              <div className='border border-border p-1 hover:scale-95 transition relative rounded overflow-hidden'>
+                <Link to={`/movies/${movie?.Title}`} className='w-full'>
+                  <img src={`${movie?.Poster}`} alt={movie?.Title} className='w-full h-64 object-cover' />
+                </Link>
+
+                <div className='absolute flex-btn gap-2 bottom-0 right-0 left-0 bg-main bg-opacity-60 text-white px-4 py-3'>
+                  {/* //Need to see later 1:18: 29 */}
+                </div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
