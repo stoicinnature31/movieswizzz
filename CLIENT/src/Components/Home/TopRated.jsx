@@ -23,6 +23,7 @@ const TopRatedMovies = () => {
           const url = `https://www.omdbapi.com/?s=${keyword}&page=${page}&apikey=${apiKey}`;
           const response = await fetch(url);
           const data = await response.json();
+          
 
           if (data && data.Search) {
             movieList.push(...data.Search);

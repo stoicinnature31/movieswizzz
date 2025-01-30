@@ -58,7 +58,7 @@ const Banner = () => {
             spaceBetween: 20,
           },
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
         }}
