@@ -4,6 +4,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
 import Aos from 'aos';
 import Loader from './Loader/Loader.jsx'
+import SearchedMovies from './Screens/SearchedMovies.jsx';
 
 function App() {
   Aos.init();
@@ -19,6 +20,7 @@ function App() {
   const Login = lazy(() => import('./Screens/Authentication/Login.jsx'));
   const Register = lazy(() => import('./Screens/Authentication/Register.jsx'));
   const Profile = lazy(() => import('./Screens/Dashboard/Profile.jsx'));
+  const SearchedMovies = lazy(() => import('./Screens/SearchedMovies.jsx'));
   // const Loader = lazy(() => import('./Loader/Loader.jsx')); receiving error
 
   return (
@@ -31,6 +33,7 @@ function App() {
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:id" element={<SingleMovie />} />
           <Route path="/watch/:id" element={<WatchPage />} />
+          <Route path="/search/:id" element={<SearchedMovies />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/profile" element={<Profile />} />

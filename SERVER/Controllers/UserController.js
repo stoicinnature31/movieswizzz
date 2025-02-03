@@ -90,4 +90,46 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
-export { registerUser, loginUser };
+
+// ***************** PRIVATE CONTROLLERS*****************
+// #Desc Update User Profile
+// #route PUT /api/users/profile
+// #access Private
+
+const UpdateUserProfile = asyncHandler(async (req, res) => {
+    const { fullName, email, image } = req.body;
+
+    try {
+        // find user in DB
+        const user = await User.findOne(req.user._id);
+
+        if (user) {
+            user.fullName = fullName || user.fullName;
+            user.email = email || user.email;
+            user.image = image || user.image;
+
+            const updatedUser = await user.save();
+
+            res.json({
+                message: 'User profile updated successfully',
+                user: {
+                    _id: updatedUser._id,
+                    fullName: updatedUser.fullName,
+                    email: updatedUser.email,
+                    image: updatedUser.image,
+                    isAdmin: updatedUser.isAdmin,
+                    token: generateToken(updatedUser._id)
+                }
+            })
+        }
+        else {
+            res.status(400);
+            throw new Error("User Not Found"); 
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Server error during user profile update' });
+    }
+})
+
+
+export { registerUser, loginUser, UpdateUserProfile };
