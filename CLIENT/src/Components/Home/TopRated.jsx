@@ -23,7 +23,7 @@ const TopRatedMovies = () => {
           const url = `https://www.omdbapi.com/?s=${keyword}&page=${page}&apikey=${apiKey}`;
           const response = await fetch(url);
           const data = await response.json();
-          
+
 
           if (data && data.Search) {
             movieList.push(...data.Search);
@@ -70,14 +70,16 @@ const TopRatedMovies = () => {
                     alt={movie.Title}
                     className="w-full h-72 object-cover"
                   />
+
+                  <div className="p-4 text-center">
+                    <h3 className="text-sm font-bold text-white truncate">
+                      {movie.Title}
+                    </h3>
+                    <p className="text-sm text-gray-400">{movie?.Year}</p>
+                    <p className="text-xs text-blue-700 font-semibold mt-2">⭐ {movie?.Type}</p>
+                  </div>
                 </Link>
-                <div className="p-4 text-center">
-                  <h3 className="text-sm font-bold text-white truncate">
-                    {movie.Title}
-                  </h3>
-                  <p className="text-sm text-gray-400">{movie?.Year}</p>
-                  <p className="text-xs text-blue-700 font-semibold mt-2">⭐ {movie?.Type}</p>
-                </div>
+
               </div>
             ))}
           </div>

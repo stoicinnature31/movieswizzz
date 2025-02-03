@@ -22,7 +22,7 @@ const NavBar = () => {
     if (searchQuery.trim() !== "") {
       navigate(`/search/${encodeURIComponent(searchQuery)}`);
     } else {
-      toast("Please enter a search query");
+      toast.info("Please enter a search query");
     }
   };
 
