@@ -8,8 +8,8 @@ const Layout = ({ children }) => {
     return (
         <>
             <div className="bg-main text-charcoal mx-auto p-3">
-                <NavBar />  \
-                <MovieCategoryMenu/>              
+                <NavBar />
+                <MovieCategoryMenu />
                 {children}
                 <Footer />
             </div>
